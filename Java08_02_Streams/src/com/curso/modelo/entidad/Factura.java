@@ -1,5 +1,7 @@
 package com.curso.modelo.entidad;
 
+import java.util.Comparator;
+
 public class Factura implements Comparable<Factura>{
 
 	private Integer id;
@@ -69,11 +71,6 @@ public class Factura implements Comparable<Factura>{
 	}
 	
 }
-
-
-
-
-
 
 
 

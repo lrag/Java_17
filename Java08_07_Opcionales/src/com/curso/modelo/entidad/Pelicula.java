@@ -7,8 +7,12 @@ public class Pelicula {
 	private Integer id;
 	private String titulo;
 	
-	//No es buena idea colocar atributos del tipo Optional
-	//Debemos utilizarlos sÛlo en mÈtodos como return
+	//No es buena idea definir atributos de tipo Optional. 
+	//Es muy mala idea
+	//Es una mala pr√°ctica
+	//Es un antipatr√≥n
+	//Es querer morirse
+	//Debemos utilizarlos s√≥lo como return en m√©todos
 	private Optional<Director> director;
 	
 	public Pelicula() {
@@ -21,7 +25,7 @@ public class Pelicula {
 		this.id = id;
 		this.titulo = titulo;
 		
-		//Esto serÌa lo adecuado
+		//Esto ser√≠a lo adecuado
 		//director = Optional.empty();
 		
 		Director d = new Director("Sr. Smith");
@@ -55,10 +59,14 @@ public class Pelicula {
 		this.director = director;
 	}*/
 
-	//AsÌn:
+	//As√≠n:
 	public void setDirector(Director director) {
 		this.director = Optional.of(director);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Pelicula [id=" + id + ", titulo=" + titulo + "]";
+	}
 
 }

@@ -24,7 +24,7 @@ public class TareaRunnable implements Runnable{
 		}
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(5_0_0_0);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

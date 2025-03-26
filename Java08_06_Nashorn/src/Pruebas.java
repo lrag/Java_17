@@ -23,6 +23,7 @@ public class Pruebas {
 			e.printStackTrace();
 		}
 		
+		
 		//Desde un fichero
 		System.out.println("============================================");
 		try {
@@ -32,6 +33,8 @@ public class Pruebas {
 		} 
 
 
+		System.exit(0);
+		
 		//Invocar funciones JS desde Java
 		System.out.println("============================================");
 		try {

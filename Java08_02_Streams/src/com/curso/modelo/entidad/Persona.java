@@ -11,6 +11,15 @@ public class Persona {
 	public Persona() {
 		super();
 	}
+	
+	public Persona(Persona otraPersona) {
+		super();
+		id     = otraPersona.id;
+		nombre = otraPersona.nombre;
+		edad   = otraPersona.edad;
+		altura = otraPersona.altura;
+		peso   = otraPersona.peso;
+	}	
 
 	public Persona(Integer id, String nombre, Double edad, Double altura,
 			Double peso) {
@@ -64,7 +73,7 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", edad=" + edad
+		return super.toString()+" - [id=" + id + ", nombre=" + nombre + ", edad=" + edad
 				+ ", altura=" + altura + ", peso=" + peso + "]";
 	}
 

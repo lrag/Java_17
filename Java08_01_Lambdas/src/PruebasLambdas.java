@@ -1,69 +1,74 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
 
 import javax.swing.JButton;
 
 public class PruebasLambdas {
 	
 	private static void insertar() {
-		//Método de palo
+		//MÃ©todo de palo
+		System.out.println("Method of stick");
 	}	
-	
+
 	public static void main(String[] args) {
-		
-		//
-		//Cases internas anónimas
-		//
-		
+				
 		JButton boton = new JButton("Dale");
 		
-		//boton.addActionListener(new OyenteBotonInsertar());
-
+		//OyenteBotonDale oyente = new OyenteBotonDale();
+		//ActionListener oyente = new OyenteBotonDale();
 		
-		//Definiendo el oyente con una clase interna anónima
-		//Definiendo el oyente con una clase interna anónima
-		//Una clase interna anónima es
-		//-una clase definida dentro de un método
-		//-Con constructor sin parámetros
-		//-inaccesible desde el resto de la aplicación
+		//boton.addActionListener(oyente);
+		//Definiendo el oyente con una clase interna anÃ³nima
+		//Una clase interna anÃ³nima es
+		//-una clase definida dentro de un mÃ©todo
+		//-Con constructor sin parÃ¡metros
+		//-inaccesible desde el resto de la aplicaciÃ³n
 		//-se programan heredando de una clase o implementando una interfaz
-		//-en un único movimiento definimos la clase y creamos el objeto		
-		ActionListener al = new ActionListener() {
+		//-en un Ãºnico movimiento definimos la clase y creamos el objeto		
+		
+		ActionListener oyente1 = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println();
+				System.out.println("BotÃ³n Dale pulsado");
 			}
-		};
-		boton.addActionListener(al);
-
-		//Igual, pero sin usar una variable intermedia
-		JButton boton2 = new JButton("Dale más");
-		boton2.addActionListener(new ActionListener() {
+		};	
+		boton.addActionListener(oyente1);
+		
+		//Igual, pero sin usar una variable intermedia	
+		boton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Botón pulsado");
+				System.out.println("BotÃ³n Dale pulsado");
 			}
-		});
+		});		
+
 		
 		//
-		//Expresiones lambda
-		//
-
+		//Lo mismo con expresiones lambda
+		//	
+		
 		JButton boton3 = new JButton();
 		ActionListener oyenteBotonInsertar = e -> insertar();
 		boton3.addActionListener(oyenteBotonInsertar);
 			
-		//Mejor todavía (sin variable):
-		boton3.addActionListener( e -> insertar() );
+		//Mejor todavÃ­a (sin variable):
+		boton3.addActionListener( e -> insertar() );		
 		
 		
-		//
-		//EXPRESIONES LAMBDA
-		//	
+		////////////////////////////////////////
+		// SINTAXIS DE LAS EXPRESIONES LAMBDA //
+		////////////////////////////////////////
+		
+		//-Solo pueden utilizarse con interfaces
+		//-Que ademÃ¡s tengan Ãºnicamente un mÃ©todo -> interfaces funcionales
+		//		
 		
 		//interface Reloj{
 		//	public void decirHora();
@@ -74,14 +79,14 @@ public class PruebasLambdas {
 				System.out.println(new Date());
 			}
 		};
-		r1.decirHora();
+		r1.decirHora();		
 		
-		//Cuando el método no recibe parámetros los parentesis son obligatorios
-		//Cuando el metodo solo tiene una línea nos podemos ahorrar las llaves del método		
-		
-		Reloj r2 = () -> System.out.println(new Date());		
-		r2.decirHora();			
-
+		//
+		//Cuando el mÃ©todo no recibe parÃ¡metros los parentesis son obligatorios
+		//Cuando el metodo solo tiene una lÃ­nea nos podemos ahorrar las llaves del mÃ©todo
+		//
+		Reloj relojDeCuco = () -> System.out.println("CUCÃš CUCÃš: "+new Date());
+		relojDeCuco.decirHora();		
 		
 		//interface Saludador{
 		//	public void saludar(String nombre);
@@ -92,15 +97,17 @@ public class PruebasLambdas {
 				System.out.println("Hola "+nombre);
 			}
 		};		
-		s1.saludar("Luis Ramón");
+		s1.saludar("Luis RamÃ³n");		
 		
-		//Podemos ahorrarnos el tipo de los parámetros
-		//Cuando el método recibe un único parámetro y no se indica el tipo se pueden quitar los parentesis 
-		Saludador s2 = nombre -> System.out.println("Hola "+nombre);
-		s2.saludar("Luis Ramón");		
-
+		//
+		//Podemos ahorrarnos el tipo de los parÃ¡metros
+		//Cuando el mÃ©todo recibe un Ãºnico parÃ¡metro y no se indica el tipo se pueden quitar los parentesis
+		//		
+		Saludador s2 = nombre -> System.out.println("Hola Radiola "+nombre);
+		s2.saludar("Luis RamÃ³n");
 		
-
+		
+		
 		//interface Calculador{
 		//	public void calcular(Double n1, Double n2);
 		//}		
@@ -110,11 +117,17 @@ public class PruebasLambdas {
 				System.out.println(n1+n2);
 			}
 		};
-		c1.calcular(25d, 500d);
-
-		//Cuando se recibe más de un parámetro los parentesis vuelven a ser obligatorios
+		c1.calcular(25d, 500d);		
+		
+		
+		Calculador c1111 = (n1, n2) -> System.out.println(n1+n2);	
+		
+		//
+		//Cuando se recibe mÃ¡s de un parÃ¡metro los parentesis son obligatorios
+		//		
 		Calculador c2 = (n1, n2) -> System.out.println(n1+n2);
-		c2.calcular(25d, 500d);
+		c2.calcular(25d, 500d);			
+		
 
 		//interface Formateador{
 		//	public String formatear(String dato1, String dato2);
@@ -125,30 +138,43 @@ public class PruebasLambdas {
 				return dato1+"+"+dato2;
 			}
 		};		
-		System.out.println(f1.formatear("aaa", "bbb"));
-
-		//Cuando quitamos las llaves del método el compilador añade un return IMPLÍCITO
-		Formateador f2 = (dato1, dato2) -> dato1+"+"+dato2;
-		System.out.println(f2.formatear("aaa", "bbb"));
-		
+		System.out.println(f1.formatear("aaa", "bbb"));		
 		
 		//
-		//¿Son closures las expresiones lambda de java?
+		//Cuando quitamos las llaves del mÃ©todo el compilador aÃ±ade un return IMPLÃCITO
+		//		
+		Formateador f2 = (dato1, dato2) -> dato1+":"+dato2;
+		System.out.println(f2.formatear("aaa", "bbb"));		
+		
+			
 		//
-		//NO: solo pueden utilizar variables declaradas fuera de ellas si son finales o 'efectivamente finales'
+		//Â¿Son closures las expresiones lambda de java?
+		//
+		//Solo pueden utilizar variables declaradas fuera de ellas si son finales o 'efectivamente finales'
 		//
 		int m1=25;	
-		Consumer<Integer> multiplicador25 = m2 -> {
+		Consumer<Integer> multiplicador = m2 -> {
 			//m1++;
 			System.out.println(m1*m2);
-		};
-			
-		multiplicador25.accept(10);
-		multiplicador25.accept(20);		
+		};		
+		//m1++;
+		
+		multiplicador.accept(10);
+		multiplicador.accept(20);			
 		
 		//
 		//Interfaces funcionales en el api de Java8
-		//		
+		//
+		//consumer   : public void accept(T t)
+		//biconsumer : public void accept(T t, J j)
+		//function   : public Tipo1 apply(Tipo2 t)
+		//biFunction : public Tipo1 apply(Tipo2 t1, Tipo3 t2)
+		//predicate  : public boolean test(T t)
+		//supplier   : public T get()
+		//	
+		//toDoubleFunction: public double applyAsDouble(Tipo t)
+		//tointFunction   : public int applyAsInt(Tipo t)
+		//
 		System.out.println("===========================================");
 		//consumer: public void accept(T t)
 		//biconsumer: public void accept(T t, J j)
@@ -159,7 +185,7 @@ public class PruebasLambdas {
 		Predicate<String> filtro = txt -> txt.length()>10;
 		
 		boolean rs1 = filtro.test("HOLA");
-		boolean rs2 = filtro.test("HOLA RADIOLA");
+		boolean rs2 = filtro.test("HOLA CARACOLA");
 		System.out.println(rs1+","+rs2);
 
 		//function
@@ -173,31 +199,29 @@ public class PruebasLambdas {
 		Supplier<Double> suplier = () -> Math.random();
 		Double n = suplier.get();
 		System.out.println(n);			
-		
+				
 	}
-
+	
 }
 
-
 /*
-//Un oyente definido en su propia clase
-//
-class OyenteBotonInsertar implements ActionListener{
+class OyenteBotonDale implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Codigo...
+		System.out.println("BotÃ³n Dale pulsado");
 	}
 }
 */
 
+
+/////////////////////////////////////////////////
+//Interfaces funcionales: solo tienen un mÃ©todo//
+/////////////////////////////////////////////////
 //
-//Interfaces funcionales: solo tienen un método
+//La anotaciÃ³n @FunctionalInterface indica al compilador que debe comprobar que efectivamente se trata
+//de una interfaz con un Ãºnico mÃ©todo
 //
 
-//
-//La anotación @FunctionalInterface indica al compilador que debe comprobar que efectivamente se trata
-//de una interfaz con un único método
-//
 @FunctionalInterface
 interface Reloj{
 	void decirHora();
@@ -205,19 +229,20 @@ interface Reloj{
 }
 
 //Consumer
+@FunctionalInterface
 interface Saludador{
 	public void saludar(String nombre);
 }
 
+//BiConsumer
 interface Calculador{
 	public void calcular(Double n1, Double n2);
 }
 
+//Function
 interface Formateador{
 	public String formatear(String dato1, String dato2);
 }
-
-
 
 
 

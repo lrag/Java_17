@@ -5,9 +5,9 @@ public interface Interface {
 	//              //
 	// Hasta java 7 //
 	//              //
-	static final int DATO=42; 
+	public static final int DATO=42; 
 	
-	void metodo1();
+	public abstract void metodo1();
 		
 	//              //
 	// Desde Java 8 //

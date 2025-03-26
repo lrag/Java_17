@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import com.curso.modelo.entidad.Direccion;
 import com.curso.modelo.entidad.Director;
 import com.curso.modelo.entidad.Pelicula;
-import com.curso.modelo.negocio.PeliculaRepositorio;
+import com.curso.modelo.repositorio.PeliculaRepositorio;
 
 public class Pruebas {
 
@@ -21,7 +21,7 @@ public class Pruebas {
 			System.out.println(p2.getTitulo());		
 		}
 				
-		//Con optional mínimo avisamos al que invoca al método de que puede recibir un null
+		//Con optional como mÃ­nimo avisamos al que invoca al mÃ©todo de que puede recibir un null
 		Optional<Pelicula> p3 = peliculaRepo.buscarOptional(3);
 		//Podemos preguntar directamente si hay algo dentro del optional, pero es muy cutre
 		if(p3.isPresent()){
@@ -34,12 +34,12 @@ public class Pruebas {
 		} 
 		
 		//Aun teniendo un optional podemos hacerlo fallar:
-		//Pelicula p4bis = gp.buscarOptional(20000).get();
+		Pelicula p4bis = peliculaRepo.buscarOptional(20000).get();
 		//System.out.println(p4bis.getTitulo());
 		
 		//
-		//isPresent. Si anidamos los 'ifPresent' es una chapuza
-		//
+		//isPresent. Si anidamos los 'isPresent' es una chapuza
+		//		
 		Optional<Pelicula> pOp = peliculaRepo.buscarOptional(1);
 		if( pOp.isPresent() ){
 			Optional<Director> dOp = pOp.get().getDirector();
@@ -49,21 +49,26 @@ public class Pruebas {
 					System.out.println(dirOp.get().getCiudad());
 				}
 			}
+		}
+		
+		//Imperativo
+		if( pOp.isPresent() ){
+			System.out.println(pOp.get().getTitulo());
 		}		
-
+		
 		//
 		//ifPresent. 
 		//
 		System.out.println("========================");
+		//Declarativo - funcional 
 		pOp.ifPresent( p -> System.out.println(p.getTitulo()) );
 
 		//
 		//flatMap y map
 		//
 		System.out.println("========================");
-		Optional<String> ciudadOp = peliculaRepo
-			.buscarOptional(1)
-			.flatMap( pelicula -> pelicula.getDirector() )
+		Optional<String> ciudadOp = peliculaRepo.buscarOptional(1) //Devuelve Op<Pelicula>
+			.flatMap( pelicula -> pelicula.getDirector() ) 
 			.flatMap( director -> director.getDireccion() )
 			.map( direccion -> direccion.getCiudad() );
 		
@@ -74,21 +79,41 @@ public class Pruebas {
 		//
 		//Or: Proporciona un optional alternativo
 		//
-		Optional<Pelicula> op = peliculaRepo.buscarOptional(1).or( () -> Optional.empty() );
+		System.out.println("========================");		
+		Optional<Pelicula> op = peliculaRepo.buscarOptional(10_000)
+			.or(() -> Optional.of(new Pelicula(null,"NO HAY PELICULA")) );
+		
+		System.out.println(op.get());
+	
 		
 		//
-		//OrElse: Entrega un valor por defecto si el opcional esta vacio
+		//OrElse: Entrega un valor por defecto, que ya tenemos preparado, si el opcional esta vacio
 		//
+		
 		System.out.println("========================");
 		String ciudad = peliculaRepo.buscarOptional(1)
-				.flatMap( p -> p.getDirector() )
-				.flatMap( d -> d.getDireccion() )
-				.map( dir -> dir.getCiudad() )
-				.orElse("No hay");
-		System.out.println(ciudad);
+			.flatMap( p -> p.getDirector() )
+			.flatMap( d -> d.getDireccion() )
+			.map( dir -> dir.getCiudad() )
+			//.orElse("No hay");
+			.orElse(ExperimentosConGaseosa.getValor()); //Cuidado con esto
 		
+		System.out.println(ciudad);
+
+		System.out.println("========================");
+		//La diferencia entre orElse y or es que or nospermite que el valor sustituto se genere 
+		//con un cï¿½digo que proporcionamos
+		Optional<String> ciudadBis = peliculaRepo.buscarOptional(1)
+			.flatMap( p -> p.getDirector() )
+			.flatMap( d -> d.getDireccion() )
+			.map( dir -> dir.getCiudad() )
+			.or(() -> {			
+				ExperimentosConGaseosa.getValor();
+				return Optional.of("No hay");
+			});
+
 		//
-		//OrElse
+		//Filter
 		//
 		String ciudad2 = peliculaRepo.buscarOptional(1)
 				.flatMap( p -> p.getDirector() )
@@ -123,4 +148,25 @@ public class Pruebas {
 	}
 	
 }
+
+class ExperimentosConGaseosa {
+	
+	public static String getValor() {
+		System.out.println("CALCULANDO EL VALOR POR DEFECTO");
+		return "NO HAY";
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -18,7 +18,7 @@ public class Director {
 
 		//direccion = Optional.empty();
 
-		direccion = Optional.of(new Direccion("Chinchón","Plaza"));		
+		direccion = Optional.of(new Direccion("ChinchÃ³n","Plaza"));		
 	}
 
 	public String getNombre() {

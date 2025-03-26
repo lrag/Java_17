@@ -45,8 +45,7 @@ public class Pruebas {
 
 		System.out.println(i1.toEpochMilli()); //Milisegundos desde el 1/1/1970
 		System.out.println(i2.toEpochMilli());
-
-
+		
 		//Los objetos de java.time son inmutables
 		System.out.println(i2.isAfter(i1));
 		//plus para añadir, minus para restar
@@ -100,8 +99,7 @@ public class Pruebas {
 		//
 		System.out.println("===========================================");
 		LocalDateTime ldt = LocalDateTime.now();
-		System.out.println("LocalDateTime:"+ldt);
-		
+		System.out.println("LocalDateTime:"+ldt);		
 		
 		//
 		//Formatters: son thread safe!

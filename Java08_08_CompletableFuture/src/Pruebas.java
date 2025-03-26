@@ -11,6 +11,8 @@ public class Pruebas {
 		
 		GestorFicheros gf = new GestorFicheros();
 
+		/*
+		
 		//Síncrono
 		System.out.println("===================================");
 		String contenidoStr = gf.leerFicheroSincrono("fichero.txt");
@@ -30,7 +32,7 @@ public class Pruebas {
 		}
 		
 		System.out.println("===================================");
-		Future<String> contenido2 = gf.leerFicheroAsincrono2("fichero.txt");
+		Future<String> contenido2 = gf.leerFicheroAsincrono2("ficheroTOCOTO.txt");
 		//
 		// Más código
 		//
@@ -39,8 +41,9 @@ public class Pruebas {
 		try {
 			System.out.println(contenido2.get());
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
+    	*/
 
 		System.out.println("===================================");
 		Future<String> contenido3 = gf.leerFicheroAsincrono3("fichero.txt");		

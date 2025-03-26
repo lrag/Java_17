@@ -35,8 +35,8 @@ public class Pruebas {
 		//Tampoco nos dejan aunque utilizemos una variable del tipo 'Interfaz'
 		Interfaz interfaz = null;
 		//interfaz.metodoEstatico(); No compila
-		interfaz.metodo();
-		interfaz.saludar();
+		//interfaz.metodo(); //NullPointerEx
+		//interfaz.saludar();
 		
 	}
 	

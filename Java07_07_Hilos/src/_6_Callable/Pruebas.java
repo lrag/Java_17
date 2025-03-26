@@ -27,7 +27,6 @@ public class Pruebas {
 		
 		//La llamada a submit es asíncrona
 		System.out.println("Hilo "+Thread.currentThread().getName()+" lanzando una tarea...");
-		
 		Future<Integer> max = terminator.submit(t);
 		
 		System.out.println("Seguimos...");

@@ -7,7 +7,6 @@ public interface Interfaz {
 	//              //	
 	public static final int DATO = 20;
 	
-	
 	public abstract void metodo();
 	
 	//              //
@@ -16,7 +15,7 @@ public interface Interfaz {
 
 	//Métodos default
 	default void saludar(){
-		System.out.println("hola"); //Anatema!
+		System.out.println("hola (default)"); //Anatema!
 		//throw new RuntimeException("Esto no está implementado todavía");
 	}
 	

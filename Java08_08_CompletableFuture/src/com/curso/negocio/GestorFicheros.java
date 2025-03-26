@@ -9,6 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Supplier;
 
 public class GestorFicheros {
 
@@ -44,6 +45,7 @@ public class GestorFicheros {
 					cf.complete(new String(contenido));					
 				} catch (IOException e) {
 					e.printStackTrace();
+					//Esto es cutre
 					cf.complete("No existe el fichero");
 				}				
 			});
@@ -101,6 +103,7 @@ public class GestorFicheros {
 					//return Files.readString(path);
 				} catch (IOException e) {
 					//e.printStackTrace();
+					//Esto es cutre
 					return "El fichero no existe";
 				}
 			});
@@ -249,7 +252,6 @@ public class GestorFicheros {
 	}
 
 }
-
 
 
 
