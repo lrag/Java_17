@@ -23,14 +23,15 @@ public class OptionalChungo {
 	}
 	
 	public boolean isPresent() {
-		return value != null;
+		return fin() != null;
 	}
 	
 	public Object get() {
-		if(value == null) {
+		Object val = fin();
+		if(val == null) {
 			throw new NoSuchElementException("Nada en el opcional :(");
 		}
-		return fin();
+		return val;
 	}
 
 	public OptionalChungo flatMap(Flatmap funcion) {
@@ -49,20 +50,29 @@ public class OptionalChungo {
 	}
 	
 	private Object fin() {
-		Object currentValue = value;
 		
 		if(value == null) {
 			return defaultValue;
 		}
 		
-		for(Object f : funcionesSalvajes) {
-			
+		Object currentValue = value;
+		
+		for(Object f : funcionesSalvajes) {			
 			if(f instanceof Function) {
 				System.out.println("map");
 				currentValue = ((Function)f).apply(currentValue);
 			} else if(f instanceof Flatmap) {
 				System.out.println("flatmap");
-				currentValue = ((Flatmap)f).apply(currentValue).get();
+				OptionalChungo op = ((Flatmap)f).apply(currentValue);
+				if(op.isPresent()) {
+					currentValue = op.get();
+				} else {
+					currentValue = null;
+				}
+			}
+			
+			if(currentValue == null) {
+				return defaultValue;
 			}
 		}		
 		

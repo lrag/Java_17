@@ -33,7 +33,6 @@ public class Pruebas {
 		//var arr[] = new int[10];
 		var arr = new int[10];           
 		
-		
 		//No podemos dejar la variable sin valor (obvio)
 		//var movida;
 		//var movida = null;
@@ -52,7 +51,7 @@ public class Pruebas {
 	
 	public static String getSaludo() {
 		return "¡Hola!";
-	}	
+	}
 	
 }
 

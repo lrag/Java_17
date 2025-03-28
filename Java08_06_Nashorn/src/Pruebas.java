@@ -17,11 +17,12 @@ public class Pruebas {
 		System.out.println("============================================");
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 		try {
-			String js = "txt='JS en la JVM!'; print(txt)";
+			String js = "var txt='JS en la JVM!'; print(txt)";
 			engine.eval(js);
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
+		
 		
 		
 		//Desde un fichero
@@ -31,9 +32,6 @@ public class Pruebas {
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
 		} 
-
-
-		System.exit(0);
 		
 		//Invocar funciones JS desde Java
 		System.out.println("============================================");

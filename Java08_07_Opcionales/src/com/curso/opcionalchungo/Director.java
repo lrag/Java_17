@@ -13,7 +13,8 @@ public class Director {
 	public Director(String nombre) {
 		super();
 		this.nombre = nombre;
-		direccion = OptionalChungo.of(new Direccion("Chinchón","Plaza"));		
+		//direccion = OptionalChungo.of(new Direccion("Chinchón","Plaza"));		
+		direccion = OptionalChungo.empty();		
 	}
 
 	public String getNombre() {

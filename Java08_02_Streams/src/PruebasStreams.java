@@ -30,7 +30,7 @@ public class PruebasStreams {
 		PruebasStreams m = new PruebasStreams();
 		m.movidas();
 	}
-	
+
 	public int comparar(Factura f1, Factura f2 ) {
 		return f1.getTotal().intValue() - f2.getTotal().intValue();
 	}
@@ -65,7 +65,7 @@ public class PruebasStreams {
 		System.out.println("====================================================");
 		//Con un for de toda la vida (solo si es list y con mucho cuidado)
 		for(int a=0; a<facturas.size(); a++){
-			//System.out.println(facturas.get(a));
+			System.out.println(facturas.get(a));
 		}		
 		
 		//Con un iterador de toda la vida
@@ -79,7 +79,7 @@ public class PruebasStreams {
 			//System.out.println(f);			
 		}	
 		
-		//Java 8: nuevo método en la interfaz collection para recorrer colecciones y mapas.
+		//Java 8: nuevo método en la interfaz collection para recorrer colecciones (tambien lo tienen los mapas).
 		//Recibe un Consumer por parámetro:
 		facturas.forEach( e -> System.out.println(e) );
 
@@ -94,6 +94,7 @@ public class PruebasStreams {
 		
 		//Los streams solo pueden utilizarse una vez:
 		//long n2 = s1.count();
+		
 		//Debemos crear un nuevo stream
 		Stream<Factura> s2 = facturas.stream();
 		System.out.println(s2.count());			
@@ -138,7 +139,9 @@ public class PruebasStreams {
 			.stream()
 			.filter(f -> f.getTotal() > 200)
 			.forEach(System.out::println);
-			
+		
+		
+		
 		//Concatenando filtros
 		System.out.println("====================================================");
 		int id = 2;
@@ -150,7 +153,7 @@ public class PruebasStreams {
 		
 		//cada objeto que sale del stream recorre toda la cadena antes
 		//de que salga el siguiente
-		System.out.println("=======================================");
+		System.out.println("====================================================");
 		facturas
 			.stream()
 			.filter( fra -> { 
@@ -161,13 +164,12 @@ public class PruebasStreams {
 				System.out.println("2:"+fra);
 				return fra.getCliente().getId()==id;
 			})
-			.forEach( fra -> System.out.println("3:"+fra));	
+			.forEach( fra -> System.out.println("3:"+fra));
 		
 		//
 		//Iterator: devuelve un iterador
 		//Lo utilizamos para controlar nosotros el ritmo con el que los objetos salen del stream
-		System.out.println("=======================================");
-		
+		System.out.println("====================================================");
 		Iterator<Factura> it = 
 			facturas
 				.stream()
@@ -212,7 +214,7 @@ public class PruebasStreams {
 		};
 		
 		Comparator<Factura> cf2 = (ff1, ff2) -> ff1.getTotal().intValue() - ff2.getTotal().intValue();
-						
+		
 		//MAX
 		Optional<Factura> fMax = 
 			facturas
@@ -233,7 +235,7 @@ public class PruebasStreams {
 		if(fMin.isPresent()){
 			System.out.println("FMin:"+fMin.get().getCodigo());
 		}	
-
+		
 		//
 		//Distinct
 		//
@@ -249,8 +251,8 @@ public class PruebasStreams {
 		facturas2
 			.stream()
 			.distinct() //usa el equals
-			.forEach( fra -> System.out.println(fra));			
-		
+			.forEach( fra -> System.out.println(fra));		
+
 		//
 		//Skip(int): Se salta cierto número de elementos del stream
 		//
@@ -278,15 +280,15 @@ public class PruebasStreams {
 		}
 		for(Cliente c: clientes2) {			
 			sc.enviarCorreoE(c.getNombre(), "OLA KE TAL");
-		}	
-		*/		
+		}
+		*/	
 		
-		//FUNCIONAL
+		//DECLARATIVO, FUNCIONAL
 		facturas
 			.stream() //de aqui salen facturitas riquitas
 			.map(fra -> fra.getCliente()) //a partir de aqui tenemos un stream de clientes
 			.distinct() //Este 'distinct' se aplica a los clientes
-			.forEach( cli -> sc.enviarCorreoE(cli.getNombre(), "OLA KE TAL") );				
+			.forEach( cli -> sc.enviarCorreoE(cli.getNombre(), "OLA KE TAL, GRAZIAS POR SU KONPRA") );				
 		
 		/*idem: (para comprobar que map devuelve Stream)
 		Stream<Cliente> streamClientes = 
@@ -394,6 +396,7 @@ public class PruebasStreams {
 		
 		//
 		//Agregando con sumatorio, media y SummaryStatistics
+		//
 		System.out.println("=======================================");				
 		
 		Double media =  
@@ -401,7 +404,7 @@ public class PruebasStreams {
 				.stream()
 				.collect(Collectors.averagingDouble( fra -> fra.getTotal() )); //Tambien existe averaging Int
 		System.out.println("Media del importe de las facturas:"+media);
-
+		
 		Integer media2 =  
 			numeros
 				.stream()
@@ -418,7 +421,7 @@ public class PruebasStreams {
 			facturas
 				.stream()
 				.collect(Collectors.summarizingDouble( fra -> fra.getTotal() ));
-		System.out.println(movida2);	
+		System.out.println(movida2);
 		
 		//
 		//Recolector Join (agregación): obtenemos un string a partir del stream
@@ -427,14 +430,14 @@ public class PruebasStreams {
 			numeros
 				.stream() //de aqui salen Integers
 				.map( num -> num.toString() ) //de aqui salen estrines
-				.collect(Collectors.joining(", ", "Numeros:", "."));
+				.collect(Collectors.joining(", "));
 		System.out.println(txt);		
 	
 		String codigosFacturas = facturas
 			.stream()
 			.map( fra -> fra.getCodigo() )
 			.collect(Collectors.joining(", ", "FACTURAS: ", "."));
-		System.out.println(codigosFacturas);		
+		System.out.println(codigosFacturas);	
 		
 		//
 		//Collectors 'group by' (agregación)
@@ -490,7 +493,7 @@ public class PruebasStreams {
 					facturitasRiquitas_MEJOR_PERO_MAL.add(f);
 				}
 			});
-		
+				
 		//
 		//BIEN con flat map:
 		//Flatmap: Recibe un objeto y devuelve un stream hecho a partir de una colección
@@ -501,7 +504,7 @@ public class PruebasStreams {
 					.flatMap( cli -> cli.getFacturas().stream() ) 
 					.collect(Collectors.toList());		
 		facturitas22.forEach( System.out::println );
-
+		
 		//
 		//Reduce(BinaryOperator) : Resume una colección en un único valor que de algún modo la representa 
 		//
@@ -524,13 +527,13 @@ public class PruebasStreams {
 				.stream()
 				.reduce( (acumulador, persona) -> { //El primer parámetro es el ACUMULADOR
 					                                //El segundo parámetro es cada uno de los elementos del stream
-
+												    //En la primera llamada acumulador es la primera persona y persona es la segunda
 					if(contador.get() == 1) {
 						acumulador = new Persona(acumulador);
 						acumulador.setId(0);
 						acumulador.setNombre("Persona media");
 					}
-					
+
 					double totEdad   = acumulador.getEdad()*contador.intValue()+persona.getEdad();
 					double totAltura = acumulador.getAltura()*contador.intValue()+persona.getAltura();
 					double totPeso   = acumulador.getPeso()*contador.intValue()+persona.getPeso();
@@ -538,7 +541,7 @@ public class PruebasStreams {
 					acumulador.setEdad(totEdad/contador.intValue());
 					acumulador.setAltura(totAltura/contador.intValue());
 					acumulador.setPeso(totPeso/contador.intValue());
-					
+							
 					return acumulador;
 				});
 		
@@ -546,7 +549,7 @@ public class PruebasStreams {
 		if( pMediaOp.isPresent()) {
 			System.out.println("Acumulador: "+pMediaOp.get());
 		}
-		
+
 		//Otro ejemplo, pero lograríamos el mismo resultado con 'max' 
 		Optional<Factura> optF3 = 
 			facturas
@@ -574,9 +577,6 @@ public class PruebasStreams {
 		palabras.add("ccc");
 		palabras.add("bbb255");
 		palabras.add("ddd1");
-
-		
-		System.out.println(Thread.currentThread().getName());
 		
 		List<String> palabrasOrdenadas = palabras
 		    .stream()
@@ -586,7 +586,7 @@ public class PruebasStreams {
 		    .collect(Collectors.toList());
 		
 		palabrasOrdenadas.forEach(p -> System.out.println(p));		
-
+		
 		//
 		// Peek(Consumer): Nos permite echar un vistazo al elemento que pasa por un punto del stream
 		//
@@ -607,7 +607,7 @@ public class PruebasStreams {
 		System.out.println("======================================");
 		ForkJoinPool commonPool = ForkJoinPool.commonPool();
 		System.out.println(commonPool.getParallelism());    // 7
-		
+
 		/*
 		Arrays.asList("a1", "a2", "b1", "c1", "c2")
 		    .parallelStream()
@@ -632,7 +632,7 @@ public class PruebasStreams {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}				
+				}	
 				System.out.format("map: %s [%s]\n", s, Thread.currentThread().getName());
 				return s.toUpperCase();
 			})
@@ -645,6 +645,16 @@ public class PruebasStreams {
 				System.out.format("forEach: %s [%s]\n", s, Thread.currentThread().getName());
 			});			
 
+		
+		//////////////////////////////
+		//                          //
+		// El peligro de los stream //
+		//                          //
+		//////////////////////////////
+		
+		
+		
+		
 		//Metodos colocados al comienzo del stream
 		//No hay
 		
@@ -687,3 +697,7 @@ class ServicioComunicaciones {
 		System.out.println("Enviando el mensaje "+mensaje+" a "+direccion);
 	}
 }
+
+
+
+

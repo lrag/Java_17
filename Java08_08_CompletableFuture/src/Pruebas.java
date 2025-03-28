@@ -1,7 +1,7 @@
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.function.Predicate;
 
 import com.curso.negocio.GestorFicheros;
 
@@ -11,15 +11,16 @@ public class Pruebas {
 		
 		GestorFicheros gf = new GestorFicheros();
 
-		/*
 		
 		//Síncrono
+		/*
 		System.out.println("===================================");
 		String contenidoStr = gf.leerFicheroSincrono("fichero.txt");
 		System.out.println(contenidoStr);
+		*/
 	
 		System.out.println("===================================");
-		Future<String> contenido = 	gf.leerFicheroAsincrono("fichero.txt");	
+		Future<String> contenido = gf.leerFicheroAsincrono("fichero.txt");	
 		//
 		//Hacer otras cosas
 		//
@@ -30,6 +31,7 @@ public class Pruebas {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
+		
 		
 		System.out.println("===================================");
 		Future<String> contenido2 = gf.leerFicheroAsincrono2("ficheroTOCOTO.txt");
@@ -43,8 +45,7 @@ public class Pruebas {
 		} catch (InterruptedException | ExecutionException e) {
 			System.out.println(e.getMessage());
 		}
-    	*/
-
+		
 		System.out.println("===================================");
 		Future<String> contenido3 = gf.leerFicheroAsincrono3("fichero.txt");		
 		//
@@ -84,6 +85,9 @@ public class Pruebas {
 			System.out.println(e.getMessage());
 			//e.printStackTrace();
 		}
+		
+		System.exit(42);
+		
 		
 		System.out.println("===================================");
 		Future<String> contenido5 = gf.concatenar2("fichero.txt", "fichero2.txt");		

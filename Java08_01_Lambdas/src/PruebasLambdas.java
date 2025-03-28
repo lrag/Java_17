@@ -23,11 +23,14 @@ public class PruebasLambdas {
 		
 		//OyenteBotonDale oyente = new OyenteBotonDale();
 		//ActionListener oyente = new OyenteBotonDale();
-		
 		//boton.addActionListener(oyente);
+		//boton.addActionListener(new OyenteBotonDale());
+		
+		
+		
 		//Definiendo el oyente con una clase interna anónima
 		//Una clase interna anónima es
-		//-una clase definida dentro de un método
+		//-una clase definida dentro otra clase y que no tiene nombre
 		//-Con constructor sin parámetros
 		//-inaccesible desde el resto de la aplicación
 		//-se programan heredando de una clase o implementando una interfaz
@@ -48,7 +51,6 @@ public class PruebasLambdas {
 				System.out.println("Botón Dale pulsado");
 			}
 		});		
-
 		
 		//
 		//Lo mismo con expresiones lambda
@@ -80,7 +82,7 @@ public class PruebasLambdas {
 			}
 		};
 		r1.decirHora();		
-		
+	
 		//
 		//Cuando el método no recibe parámetros los parentesis son obligatorios
 		//Cuando el metodo solo tiene una línea nos podemos ahorrar las llaves del método
@@ -118,10 +120,7 @@ public class PruebasLambdas {
 			}
 		};
 		c1.calcular(25d, 500d);		
-		
-		
-		Calculador c1111 = (n1, n2) -> System.out.println(n1+n2);	
-		
+
 		//
 		//Cuando se recibe más de un parámetro los parentesis son obligatorios
 		//		
@@ -132,6 +131,7 @@ public class PruebasLambdas {
 		//interface Formateador{
 		//	public String formatear(String dato1, String dato2);
 		//}
+		
 		System.out.println("========================");
 		Formateador f1 = new Formateador() {
 			public String formatear(String dato1, String dato2) {
@@ -173,7 +173,7 @@ public class PruebasLambdas {
 		//supplier   : public T get()
 		//	
 		//toDoubleFunction: public double applyAsDouble(Tipo t)
-		//tointFunction   : public int applyAsInt(Tipo t)
+		//toIntFunction   : public int applyAsInt(Tipo t)
 		//
 		System.out.println("===========================================");
 		//consumer: public void accept(T t)
@@ -245,7 +245,15 @@ interface Formateador{
 }
 
 
+class OyenteBotonDale implements ActionListener{
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("Botón DALE pulsado...");
+	
+	}
+	
+}
 
 
 

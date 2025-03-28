@@ -12,8 +12,7 @@ public class Tarea implements Callable<Integer>{
 		this.datos = datos;
 	}
 
-	public Integer call(){
-		
+	public Integer call(){		
 		Integer max = Integer.MIN_VALUE;
 			for(int a=0; a<datos.length; a++){
 			if(datos[a] > max)

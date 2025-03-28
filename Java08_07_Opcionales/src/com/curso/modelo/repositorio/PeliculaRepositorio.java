@@ -20,6 +20,10 @@ public class PeliculaRepositorio {
 		//Si creamos un opcional con un nulo tenemos un NullPointerException :) 
 		//Pelicula p = null;
 		//return Optional.of(p);
+		
+		//Tambien tenemos esto:
+		//String x = null;
+		//Optional<String> strOp = Optional.ofNullable(x); //Si no hay valor se hace un Optional.empty()
 
 		switch(id){
 			case 1 : return Optional.of(new Pelicula(1,"Alien"));

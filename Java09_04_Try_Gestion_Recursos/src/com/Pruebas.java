@@ -20,16 +20,15 @@ public class Pruebas {
 			e.printStackTrace();
 		}		
 		
-		//A partir de Java9 tambien pueden declararse antes
+		//A partir de Java9 tambien pueden declararse antes 
+		//Han de ser finales o efectivamente finales
 		FileWriter fw2 = new FileWriter("texto2.txt");  
 		BufferedWriter bw = new BufferedWriter(fw2);
 		try ( fw2; bw ){			
 			bw.write("En fin...\n");			
 		} catch(IOException e){
 			e.printStackTrace();
-		}	
-		
-		//Y ya
+		}
 		
 	}
 	

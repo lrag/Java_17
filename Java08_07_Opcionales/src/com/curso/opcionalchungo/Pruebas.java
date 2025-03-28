@@ -26,7 +26,7 @@ public class Pruebas {
 		if(op3.isPresent()) {
 			System.out.println("Calle: "+op3.get());
 		}
-			
+					
 		Object calle = peliculaRepo.buscar(1)
 			.flatMap(p -> ((Pelicula)p).getDirector())
 			.flatMap(d -> ((Director)d).getDireccion())

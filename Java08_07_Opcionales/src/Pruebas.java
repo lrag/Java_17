@@ -20,7 +20,7 @@ public class Pruebas {
 		if( p2 != null ) {
 			System.out.println(p2.getTitulo());		
 		}
-				
+		
 		//Con optional como mínimo avisamos al que invoca al método de que puede recibir un null
 		Optional<Pelicula> p3 = peliculaRepo.buscarOptional(3);
 		//Podemos preguntar directamente si hay algo dentro del optional, pero es muy cutre
@@ -71,7 +71,6 @@ public class Pruebas {
 			.flatMap( pelicula -> pelicula.getDirector() ) 
 			.flatMap( director -> director.getDireccion() )
 			.map( direccion -> direccion.getCiudad() );
-		
 		if( ciudadOp.isPresent() ){
 			System.out.println(ciudadOp.get());
 		}
@@ -84,33 +83,28 @@ public class Pruebas {
 			.or(() -> Optional.of(new Pelicula(null,"NO HAY PELICULA")) );
 		
 		System.out.println(op.get());
-	
 		
 		//
 		//OrElse: Entrega un valor por defecto, que ya tenemos preparado, si el opcional esta vacio
 		//
-		
 		System.out.println("========================");
 		String ciudad = peliculaRepo.buscarOptional(1)
 			.flatMap( p -> p.getDirector() )
 			.flatMap( d -> d.getDireccion() )
 			.map( dir -> dir.getCiudad() )
-			//.orElse("No hay");
-			.orElse(ExperimentosConGaseosa.getValor()); //Cuidado con esto
+			.orElse("No hay");
+			//.orElse(ExperimentosConGaseosa.getValor()); //Cuidado con esto
 		
 		System.out.println(ciudad);
 
 		System.out.println("========================");
-		//La diferencia entre orElse y or es que or nospermite que el valor sustituto se genere 
-		//con un c�digo que proporcionamos
+		//La diferencia entre orElse y or es que or nos permite que el valor sustituto se genere 
+		//con un código que proporcionamos
 		Optional<String> ciudadBis = peliculaRepo.buscarOptional(1)
 			.flatMap( p -> p.getDirector() )
 			.flatMap( d -> d.getDireccion() )
 			.map( dir -> dir.getCiudad() )
-			.or(() -> {			
-				ExperimentosConGaseosa.getValor();
-				return Optional.of("No hay");
-			});
+			.or(() -> Optional.of("No hay"));
 
 		//
 		//Filter
@@ -119,7 +113,7 @@ public class Pruebas {
 				.flatMap( p -> p.getDirector() )
 				.flatMap( d -> d.getDireccion() )
 				.map( dir -> dir.getCiudad() )
-				.filter( c -> c.equals("Santa Pola" ))
+				.filter( c -> c.equals("Santa Pola"))
 				.orElse("No es Santa Pola");
 		System.out.println(ciudad2);
 		
@@ -137,10 +131,8 @@ public class Pruebas {
 	}
 
 	public static String buscarDireccion(Integer id) throws Exception {
-		PeliculaRepositorio gp = new PeliculaRepositorio();
-		Optional<Pelicula> peliculaOp = gp.buscarOptional(id);	
-		
-		return peliculaOp
+		PeliculaRepositorio pr = new PeliculaRepositorio();
+		return pr.buscarOptional(id)
 			.flatMap( p -> p.getDirector() )
 			.flatMap( d -> d.getDireccion() )
 			.map( dir -> dir.getCiudad() )

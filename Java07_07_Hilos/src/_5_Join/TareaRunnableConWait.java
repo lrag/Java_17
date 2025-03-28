@@ -1,17 +1,25 @@
 package _5_Join;
 
 
-public class TareaRunnable implements Runnable{
+public class TareaRunnableConWait implements Runnable{
 
 	private int[] datos;
-	private int resultado;
+	private Integer resultado;
 
-	public TareaRunnable(int[] datos) {
+	public TareaRunnableConWait(int[] datos) {
 		super();
 		this.datos = datos;
 	}
 	
-	public int getResultado() {
+	public synchronized Integer getResultado() throws InterruptedException {
+		
+		System.out.println(Thread.currentThread().getName()+": Entrando en getResultado");
+		
+		if(resultado == null) {
+			System.out.println(Thread.currentThread().getName()+": wait");
+			wait();
+		}
+		
 		return resultado;
 	}
 	
@@ -32,6 +40,10 @@ public class TareaRunnable implements Runnable{
 		System.out.println("Soy la tarea y el máximo es:"+max+", TH:"+Thread.currentThread().getId());
 		
 		resultado = max;
+		
+		synchronized(this) {
+			notify();
+		}
 	}
 	
 }

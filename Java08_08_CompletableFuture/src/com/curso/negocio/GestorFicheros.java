@@ -1,5 +1,6 @@
 package com.curso.negocio;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -87,7 +88,7 @@ public class GestorFicheros {
 	//Tal y como está este método es equivalente a 'leerFicheroAsincrono'
 	//
 	public Future<String> leerFicheroAsincrono3(String fichero){
-		
+
 		return CompletableFuture.supplyAsync(
 			() -> {
 				try {
@@ -138,6 +139,39 @@ public class GestorFicheros {
 	}	
 	
 	//
+	//Handle
+	//
+	/*
+	public Future<String> leerFicheroAsincrono5(String fichero){
+		
+		//CompletableFuture.supplyAsync(Supplier, Executor);
+		
+		return CompletableFuture.supplyAsync(
+				() -> {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+	
+					
+					Path path = Paths.get(fichero);
+					byte[] contenido = Files.readAllBytes(path);
+					return new String(contenido);
+				})
+				.handle( (resultado, throwable) -> {
+					if(throwable != null) {
+						//Podemos lanzar la excepción real
+						//throw throwable;
+						//O la que estimemos oportuna
+						throw new Exception("Error al leer el fichero");
+					}
+					return resultado;
+				});				
+	}
+	*/
+	
+	//
 	//Síncrono
 	//
 	public String concatenarSincrono(String fichero1, String fichero2) throws IOException{
@@ -151,9 +185,9 @@ public class GestorFicheros {
 	
 	public Future<String> concatenar(String fichero1, String fichero2){
 
-		/*
-		//Leyendo los dos ficheros y concatenandolos en el mismo callable
+		//Leyendo los dos ficheros y concatenandolos en el mismo supplier
 		//(El mismo hilo lee los dos ficheros)
+		/*
 		return CompletableFuture.supplyAsync(
 				() -> {
 					Path path1 = Paths.get(fichero1);
@@ -178,7 +212,6 @@ public class GestorFicheros {
 					}
 				});
 		*/
-		
 
 		//Podemos concatenar la ejecución de varios callables con 'thenApply'
 		//Cada callable recibe por parámetro el sesultado creado por el anterior

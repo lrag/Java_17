@@ -1,6 +1,6 @@
 package _5_Join;
 
-public class Prueba {
+public class PruebaConJoin {
 
 	public static void main(String[] args) {
 		
@@ -16,9 +16,9 @@ public class Prueba {
 		System.out.println("===========================");
 		System.out.println("Hilo main haciendo cosas...");
 		
-		TareaRunnable t1 = new TareaRunnable(datos1);		
-		TareaRunnable t2 = new TareaRunnable(datos2);		
-		TareaRunnable t3 = new TareaRunnable(datos3);		
+		TareaRunnableConJoin t1 = new TareaRunnableConJoin(datos1);		
+		TareaRunnableConJoin t2 = new TareaRunnableConJoin(datos2);		
+		TareaRunnableConJoin t3 = new TareaRunnableConJoin(datos3);		
 		Thread th1 = new Thread(t1);		
 		Thread th2 = new Thread(t2);		
 		Thread th3 = new Thread(t3);		
@@ -27,7 +27,7 @@ public class Prueba {
 		th2.start();
 		th3.start();
 		
-		System.out.println("Hilo main haciendo más cosas mientras las tarea se completan");
+		System.out.println("Hilo main haciendo más cosas mientras las tareas se completan");
 		
 		//Una espera activa con while funcionaría
 		//-Esto es cutre porque:
@@ -37,14 +37,14 @@ public class Prueba {
 		//while(t2.getResultado()==0) { }
 		//while(t3.getResultado()==0) { }
 		
-		//Aqui dice '0'
+		//Aqui dice 'null'
 		System.out.println(t1.getResultado());
 		System.out.println(t2.getResultado());
 		System.out.println(t3.getResultado());
 
 		try {
 			//Cuando un hilo ejecuta un join pasa automáticamente al estado 'wait'
-			//En este caso es el hilo 'Main' el que ejecuta el join y pasa a estdo 'wait'
+			//En este caso es el hilo 'Main' el que ejecuta el join y pasa a estao 'wait'
 			//Cuando el hilo 'th1' termine su tarea ejecutará un 'notify' que sacará del estado 'wait'
 			//al hilo main
 			th1.join();

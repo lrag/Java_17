@@ -1,3 +1,4 @@
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -15,6 +16,7 @@ public class PruebasBase64 {
 
 	public static void main(String[] args) throws Exception{
 
+		//Codificando de forma binaria: cada bit es un byte
 		//Codificando de forma decimal: cada byte son tres dígitos 
 		//Codificando de forma hexadecimal: cada byte son dos caracteres
 		//Base64: Cada tres bytes son cuatro caracteres. 1,33
@@ -68,7 +70,7 @@ public class PruebasBase64 {
 		//Escribiendo
 		try (OutputStream os = Base64
 								.getEncoder()
-								.wrap(new FileOutputStream("datos-base64.txt"))) {
+								.wrap(new BufferedOutputStream(new FileOutputStream("datos-base64.txt")))) {
 			os.write(txt.getBytes("utf-8"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
