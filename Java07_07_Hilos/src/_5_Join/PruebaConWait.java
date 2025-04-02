@@ -20,7 +20,7 @@ public class PruebaConWait {
 		
 		try {
 			Integer rs = t1.getResultado();
-			System.out.println(rs);
+			System.out.println("Hilo main: "+rs);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -19,8 +19,8 @@ public class Pruebas {
 		List<Cliente> clientes = List.of(new Cliente(1), new Cliente(2), new Cliente(3), new Cliente(4), new Cliente(5),
 				new Cliente(6), new Cliente(7), new Cliente(8), new Cliente(9));
 
-		Executor executorService = Executors.newSingleThreadScheduledExecutor();
-		//Executor executorService = Executors.newFixedThreadPool(8);
+		//Executor executorService = Executors.newSingleThreadScheduledExecutor();
+		Executor executorService = Executors.newFixedThreadPool(8);
 
 		// Creamos los elementos del stream
 		ClientesPublisher cliPublisher = new ClientesPublisher(executorService);

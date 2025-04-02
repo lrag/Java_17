@@ -48,8 +48,7 @@ public class Pruebas {
 		String txt4 = txt3.toUpperCase();
 		String txt5 = txt3.transform(txt -> txt.toUpperCase());
 		System.out.println(txt4);
-
-	
+		
 	}
 	
 }

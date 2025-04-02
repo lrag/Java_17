@@ -69,7 +69,7 @@ public class Pruebas {
 		discos.add(new Disco("Abbey Road"));
 		discos.add(new Disco("Selling England by the pound"));
 		discos.add(new Disco("Crime of the century"));
-		copiaInmutableList.forEach(d -> System.out.println(d));
+		copiaInmutableList.forEach(d -> System.out.println("1: "+d));
 				
 		System.out.println("==================================");	
 		//Streams; Collectors

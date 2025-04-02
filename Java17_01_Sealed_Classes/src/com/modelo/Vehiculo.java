@@ -1,6 +1,7 @@
 package com.modelo;
 
 import com.modelo.otroPaquete.Camion;
+import com.modelo.otroPaquete.CamionArticulado;
 import com.modelo.otroPaquete.Furgoneta;
 
 

@@ -10,7 +10,6 @@ public class Pruebas {
 	public static void main(String[] args) throws IOException {
 		
 		GestorFicheros gf = new GestorFicheros();
-
 		
 		//Síncrono
 		/*
@@ -21,17 +20,18 @@ public class Pruebas {
 	
 		System.out.println("===================================");
 		Future<String> contenido = gf.leerFicheroAsincrono("fichero.txt");	
+		
 		//
 		//Hacer otras cosas
 		//
-		System.out.println("Haciendo otras cosas...");
+		System.out.println(Thread.currentThread().getName()+": Haciendo otras cosas...");
 		
 		try {
+			System.out.println(Thread.currentThread().getName()+": Abriendo el future...");
 			System.out.println(contenido.get());
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
-		
 		
 		System.out.println("===================================");
 		Future<String> contenido2 = gf.leerFicheroAsincrono2("ficheroTOCOTO.txt");
@@ -71,7 +71,7 @@ public class Pruebas {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}	
-
+		
 		System.out.println("===================================");
 		Future<String> contenido4 = gf.concatenar("fichero.txt", "fichero2.txt");
 		//
@@ -87,6 +87,21 @@ public class Pruebas {
 		}
 		
 		System.exit(42);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		System.out.println("===================================");

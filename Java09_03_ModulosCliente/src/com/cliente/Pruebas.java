@@ -11,7 +11,7 @@ public class Pruebas {
 		System.out.println(s.saludar("Luis Ramón"));
 		
 		//Util u = new Util();
-		//ou.metodo();
+		//u.metodo();
 		
 	}
 	

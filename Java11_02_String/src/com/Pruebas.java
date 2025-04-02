@@ -14,7 +14,7 @@ public class Pruebas {
 		txt4.lines().forEach(txt -> System.out.println(txt));
 		
 		//isEmpty: true cuando la cadena tiene longitud 0
-		//isBlack: cuando la cadena tiene longitud pero está vacía (espacio, tab...)
+		//isBlanck: cuando la cadena tiene longitud pero está vacía (espacio, tab...)
 		System.out.println("============================");
 		String txt1 = "";
 		String txt2 = "   ";

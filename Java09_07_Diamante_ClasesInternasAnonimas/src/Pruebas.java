@@ -5,6 +5,10 @@ public class Pruebas {
 
 	public static void main(String[] args) {
 		
+		List<String> palabras = new ArrayList<>();
+		
+		
+		
 		//Hasta Java 8
 		EjemploInterfaz<String> ei1 = new EjemploInterfaz<String>() {
 			@Override

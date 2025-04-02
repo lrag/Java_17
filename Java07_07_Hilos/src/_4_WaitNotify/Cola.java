@@ -19,12 +19,8 @@ public class Cola {
 		}		
 		
 		notify();
-		cola.offer(mensaje);
-				
+		cola.offer(mensaje);				
 	}
-	
-	
-	
 	
 	public synchronized String getMensaje() {
 		
@@ -39,8 +35,7 @@ public class Cola {
 		notify();		
 		//notifyAll();
 		
-		return cola.poll();
-		
+		return cola.poll();		
 	}
 	
 }

@@ -34,7 +34,14 @@ public class Pruebas {
 		System.out.println(p1);
 		System.out.println(p1.equals(p2));
 		//E incluir otros (si es que tiene sentido)
-		p1.metodo();				
+		p1.metodo();
+		
+		//Los record son objetos
+		Object obj = p1;
+		if(obj instanceof Producto p3) {
+			System.out.println(p3.nombre()+", "+p3.fabricante());
+		}
+		
 	}
 	
 }

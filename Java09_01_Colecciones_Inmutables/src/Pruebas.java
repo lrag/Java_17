@@ -36,13 +36,15 @@ public class Pruebas {
 		discosInmutable.forEach( d -> d.setTitulo(d.getTitulo().toUpperCase()));
 		discosInmutable.forEach( d -> System.out.println(d));
 		
-		//Si modificamos el array list original...
+		//Si modificamos el set original...
 		System.out.println("==================================");
 		discos.add(new Disco("Dark side of the moon"));
 		discos.add(new Disco("Machine head"));
 		discos.add(new Disco("Back in black"));
 		//Tan inmutable no era...
 		discosInmutable.forEach( d -> System.out.println(d));
+		
+		System.exit(0);
 		
 		//        //
 		// Java 9 //

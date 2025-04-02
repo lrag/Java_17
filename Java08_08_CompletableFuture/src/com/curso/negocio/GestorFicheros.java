@@ -43,6 +43,7 @@ public class GestorFicheros {
 				Path path = Paths.get(fichero);	
 				try {
 					byte[] contenido = Files.readAllBytes(path);
+					System.out.println(Thread.currentThread().getName()+": Tarea completada");
 					cf.complete(new String(contenido));					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -218,7 +219,7 @@ public class GestorFicheros {
 		return CompletableFuture.supplyAsync(
 			() -> {
 				
-				System.out.println("Bloque 1:"+Thread.currentThread().getId());
+				System.out.println("Bloque 1:"+Thread.currentThread().getName());
 				
 				Path path = Paths.get(fichero1);
 				try {
@@ -232,7 +233,7 @@ public class GestorFicheros {
 			})
 		.thenApply(
 			(contenidoFichero1) -> {
-				System.out.println("Bloque 2:"+Thread.currentThread().getId());
+				System.out.println("Bloque 2:"+Thread.currentThread().getName());
 				Path path = Paths.get(fichero2);
 				try {
 					byte[] contenido = Files.readAllBytes(path);
@@ -245,7 +246,7 @@ public class GestorFicheros {
 			})
 		.handle(
 			(contenidoConcatenado, throwable) -> {
-				System.out.println("JANDLE:"+Thread.currentThread().getId());
+				System.out.println("JANDLE:"+Thread.currentThread().getName());
 				if(contenidoConcatenado!=null) {
 					return contenidoConcatenado;
 				} else {
@@ -285,10 +286,5 @@ public class GestorFicheros {
 	}
 
 }
-
-
-
-
-
 
 
