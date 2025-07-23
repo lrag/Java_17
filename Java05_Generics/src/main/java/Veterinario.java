@@ -28,6 +28,7 @@ public class Veterinario<T extends Animal> {
 	//Ponemos como limitacion que las colecciones son todas del mismo tipo de animal
 	//Lo solucionamos haciendo el metodo generico y que en el momento de llamar sea cuando se
 	//escoja de que tipo es la collection
+	//public void examinarAnimales(Collection<Perro> animales){
 	public void examinarAnimales(Collection<? extends Animal> animales){
 		//Atiza!
 		//Puedo acceder sin nigun problema a la lista

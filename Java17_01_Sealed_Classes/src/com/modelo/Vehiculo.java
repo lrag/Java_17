@@ -17,4 +17,9 @@ import com.modelo.otroPaquete.Furgoneta;
 //
 public abstract sealed class Vehiculo permits Coche, Camion, Furgoneta {	
 	public abstract void arrancar();	
+	
+	public void movida() {
+		
+	}
+	
 }

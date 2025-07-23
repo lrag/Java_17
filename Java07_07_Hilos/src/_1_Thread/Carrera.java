@@ -4,6 +4,7 @@ public class Carrera {
 
 	public static void main(String[] args) {
 		
+		
 		CaballoThread c1 = new CaballoThread("Rocinante");
 		CaballoThread c2 = new CaballoThread("Bucefalo");
 		CaballoThread c3 = new CaballoThread("Imperioso");
@@ -15,9 +16,9 @@ public class Carrera {
 		
 		//Dentro de start se crea un nuevo hilo que empieza a ejecutar
 		//el método run del objeto indicado
-		c1.start();
+		c1.start(); //Start es un método asíncrono
 		c2.start();
-		c3.start();		
+		c3.start();
 		
 	}
 	

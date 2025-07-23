@@ -9,34 +9,34 @@ public class Cola {
 
 	public synchronized void addMensaje(String mensaje) {
 		
-		while(cola.size()==4) {
-			System.out.println("Cola llena");
+		while(cola.size()>3) {
 			try {
+				System.out.println("Cola llena");
 				wait();
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 		
+		cola.offer(mensaje);	
 		notify();
-		cola.offer(mensaje);				
 	}
 	
 	public synchronized String getMensaje() {
 		
 		while(cola.size()==0) {
 			try {
+				System.out.println("Cola vacía");
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-		}	
+			}			
+		}
 		
-		notify();		
-		//notifyAll();
-		
+		notify();
 		return cola.poll();		
-	}
+	}	
 	
 }
 

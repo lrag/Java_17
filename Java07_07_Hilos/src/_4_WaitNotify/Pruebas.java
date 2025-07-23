@@ -20,8 +20,8 @@ public class Pruebas {
 		Thread th4 = new Thread(c1);
 		Thread th5 = new Thread(c2);
 		Thread th6 = new Thread(c3);
-		
-		th1.start();
+
+		th1.start(); 
 		th2.start();
 		th3.start();
 		th4.start();

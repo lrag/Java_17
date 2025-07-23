@@ -19,13 +19,13 @@ public class PruebaConJoin {
 		TareaRunnableConJoin t1 = new TareaRunnableConJoin(datos1);		
 		TareaRunnableConJoin t2 = new TareaRunnableConJoin(datos2);		
 		TareaRunnableConJoin t3 = new TareaRunnableConJoin(datos3);		
-		Thread th1 = new Thread(t1);		
-		Thread th2 = new Thread(t2);		
-		Thread th3 = new Thread(t3);		
+		Thread thread1 = new Thread(t1);		
+		Thread thread2 = new Thread(t2);		
+		Thread thread3 = new Thread(t3);		
 		
-		th1.start(); //Asíncrona
-		th2.start();
-		th3.start();
+		thread1.start(); //Asíncrona
+		thread2.start();
+		thread3.start();
 		
 		System.out.println("Hilo main haciendo más cosas mientras las tareas se completan");
 		
@@ -33,23 +33,25 @@ public class PruebaConJoin {
 		//-Esto es cutre porque:
 		//-existe el 'join'
 		//-Tenemos a un hilo dando vueltas a un while desaprovechando el procesador
-		//while(t1.getResultado()==0) { }
-		//while(t2.getResultado()==0) { }
-		//while(t3.getResultado()==0) { }
+		//while(t1.getResultado()==null) { }
+		//while(t2.getResultado()==null) { }
+		//while(t3.getResultado()==null) { }
 		
 		//Aqui dice 'null'
 		System.out.println(t1.getResultado());
 		System.out.println(t2.getResultado());
 		System.out.println(t3.getResultado());
 
+		//Thread.yield();
+		
 		try {
 			//Cuando un hilo ejecuta un join pasa automáticamente al estado 'wait'
-			//En este caso es el hilo 'Main' el que ejecuta el join y pasa a estao 'wait'
+			//En este caso es el hilo 'Main' el que ejecuta el join y pasa a estado 'wait'
 			//Cuando el hilo 'th1' termine su tarea ejecutará un 'notify' que sacará del estado 'wait'
 			//al hilo main
-			th1.join();
-			th2.join();
-			th3.join();
+			thread1.join();
+			thread2.join();
+			thread3.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

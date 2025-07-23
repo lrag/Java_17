@@ -37,11 +37,11 @@ public class Pruebas {
 				Cinco				
 			""";		
 		String texto4 = """                    
+				Uno
 				Dos
 				Tres
 				Cuatro
-				Uno
-				Cinco				
+				Cinco
 		""";		
 					
 		//El compilador tiene en cuenta el sangrado del código

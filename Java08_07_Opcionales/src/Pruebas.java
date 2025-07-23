@@ -75,14 +75,18 @@ public class Pruebas {
 			System.out.println(ciudadOp.get());
 		}
 		
+		
+		/*
 		//
 		//Or: Proporciona un optional alternativo
 		//
 		System.out.println("========================");		
 		Optional<Pelicula> op = peliculaRepo.buscarOptional(10_000)
 			.or(() -> Optional.of(new Pelicula(null,"NO HAY PELICULA")) );
-		
+			
 		System.out.println(op.get());
+		*/
+		
 		
 		//
 		//OrElse: Entrega un valor por defecto, que ya tenemos preparado, si el opcional esta vacio
@@ -97,6 +101,7 @@ public class Pruebas {
 		
 		System.out.println(ciudad);
 
+		
 		System.out.println("========================");
 		//La diferencia entre orElse y or es que or nos permite que el valor sustituto se genere 
 		//con un código que proporcionamos
@@ -138,6 +143,7 @@ public class Pruebas {
 			.map( dir -> dir.getCiudad() )
 			.orElseThrow( () -> new Exception("No existe"));		
 	}
+	
 	
 }
 

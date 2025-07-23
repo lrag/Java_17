@@ -1,3 +1,6 @@
+import com.curso.dos.ClaseQueImplementaDosInterfacesQueDefinenElMismoMetodo;
+import com.curso.dos.InterfazA;
+import com.curso.dos.InterfazB;
 import com.curso.uno.Clase1;
 import com.curso.uno.Implementacion1;
 import com.curso.uno.Implementacion2;
@@ -13,10 +16,13 @@ public class Pruebas {
 		
 		//Metodos 'normales' y default
 		i1.metodo();
-		i1.saludar();
+		i1.saludar("Luis Ramón");
 		
 		i2.metodo();
-		i2.saludar();
+		i2.saludar("Luis Ramón");
+		
+		System.exit(42);
+		
 		
 		//Métodos estáticos
 		Clase1 c1 = new Clase1();
@@ -25,9 +31,11 @@ public class Pruebas {
 		//Lo correcto es utilizar la clase
 		Clase1.metodoEstatico();
 		
-		//No podemos acceder a los métodos estáticos de la interfaz utilizando una variable
+		
+		//No podemos acceder a los métodos estáticos definidos en la interfaz utilizando una variable
 		//del tipo que la implementa
 		//i1.metodoEstatico();
+
 		
 		//Tenemos que utilizar la interfaz para ello
 		Interfaz.metodoEstatico();
@@ -37,6 +45,14 @@ public class Pruebas {
 		//interfaz.metodoEstatico(); No compila
 		//interfaz.metodo(); //NullPointerEx
 		//interfaz.saludar();
+		
+		
+		ClaseQueImplementaDosInterfacesQueDefinenElMismoMetodo x = new ClaseQueImplementaDosInterfacesQueDefinenElMismoMetodo();
+		x.metodo();
+		//x.metodoEstatico();
+		InterfazA.metodoEstatico();
+		InterfazB.metodoEstatico();
+		
 		
 	}
 	

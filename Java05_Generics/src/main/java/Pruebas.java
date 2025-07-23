@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,8 +28,9 @@ public class Pruebas {
 		//Lo peor: podemos añadir cualquier otra cosa a nuestra lista de palabras
 		//Es un problema en potencia
 		palabras.add(50);
+		*/
 		
-		ArrayListChungo<String> palabras2 = new ArrayListChungo<String>();
+		ArrayListChungoConGenerics<String> palabras2 = new ArrayListChungoConGenerics<String>();
 		palabras2.add("DOLOR DE ESPALDA");
 		//palabras2.add(100); //Error!! Solo admite Strings
 		
@@ -37,7 +39,7 @@ public class Pruebas {
 		
 		GrabadorDeDatos<FileWriter> gdd = new GrabadorDeDatos<FileWriter>();
 		//GrabadorDeDatos<Scanner> gdd2 = new GrabadorDeDatos<Scanner>();
-		*/
+		
 		
 		//METODOS GENERICOS
 		Veterinario<Perro> v = new Veterinario<Perro>();
@@ -50,6 +52,8 @@ public class Pruebas {
 		
 		List<Gato> gatos = new ArrayList<Gato>();
 		List<Pajaro> pajaros = new ArrayList<Pajaro>();
+		
+		v.curarAnimales(jauria2);
 		
 		v.examinarAnimales(gatos);
 		v.examinarAnimales(pajaros);

@@ -20,8 +20,8 @@ public class Pruebas {
 		}
 		
 		//En Java21 podemos hacer esto:
-		if(obj instanceof Cliente(Integer id, String nombre, String direccion, String telefono)) {
-			System.out.println(nombre+", "+direccion);
+		if(obj instanceof Cliente(Integer id_1, String nombre_2, String direccion_3, String telefono_4)) {
+			System.out.println(nombre_2+", "+direccion_3);
 		}
 		
 

@@ -18,6 +18,11 @@ public class PruebaConWait {
 		
 		System.out.println("Hilo main haciendo más cosas mientras las tareas se completan");
 		
+		//Podríamos hacer una espera activa, pero esto es una castaña
+		//while(t1.getResultado()==null) {
+			//Nada
+		//}
+		
 		try {
 			Integer rs = t1.getResultado();
 			System.out.println("Hilo main: "+rs);

@@ -20,13 +20,15 @@ public class CaballoRunnable implements Runnable {
 
 		for(int a=0; a<=100; a++){
 			System.out.printf("Soy el caballo %10s y he recorrido %d\n", nombre, a);
+			
 			/*
 			try {
 				Thread.sleep(0,500_000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-*/
+			*/
+
 		}
 		
 		meta.apuntar(this);

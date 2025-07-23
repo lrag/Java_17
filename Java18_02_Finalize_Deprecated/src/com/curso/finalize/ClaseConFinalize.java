@@ -11,10 +11,10 @@ public class ClaseConFinalize {
 	
 	private FileWriter fw;
 	private Socket sk;
-	
 
 	@Override
-	public void finalize() {	
+	public void finalize() {
+		
 		System.out.println("Adios mundo cruel");
 		try {
 			//fw.close();

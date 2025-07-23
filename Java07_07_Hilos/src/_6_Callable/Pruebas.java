@@ -29,11 +29,10 @@ public class Pruebas {
 		System.out.println("Hilo "+Thread.currentThread().getName()+" lanzando una tarea...");
 		Future<Integer> max = terminator.submit(t);
 		
-		System.out.println("Seguimos...");
-
+		System.out.println("Seguimos haciendo cositas...");
 		
 		try {
-			System.out.println("Pruebas.java:"+max.get()); //hace un join si el integer no está 
+			System.out.println("Pruebas.java:"+max.get()); //hace un 'join' si el integer no está 
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}

@@ -13,9 +13,9 @@ public interface Interfaz {
 	// Desde java 8 //
 	//              //
 
-	//Métodos default
-	default void saludar(){
-		System.out.println("hola (default)"); //Anatema!
+	//Métodos default (publicos)
+	default void saludar(String nombre){
+		System.out.println("hola "+nombre+" (default)"); //Anatema!
 		//throw new RuntimeException("Esto no está implementado todavía");
 	}
 	

@@ -27,7 +27,7 @@ public class GestorFicheros {
 	//Devolviendo un valor conocido en caso de fallo
 	//
 	//CompletableFuture hereda de Future
-	public Future<String> leerFicheroAsincrono(String fichero){
+	public CompletableFuture<String> leerFicheroAsincrono(String fichero){
 
 		CompletableFuture<String> cf = new CompletableFuture<>();
 		
@@ -89,7 +89,6 @@ public class GestorFicheros {
 	//Tal y como está este método es equivalente a 'leerFicheroAsincrono'
 	//
 	public Future<String> leerFicheroAsincrono3(String fichero){
-
 		return CompletableFuture.supplyAsync(
 			() -> {
 				try {
@@ -217,8 +216,7 @@ public class GestorFicheros {
 		//Podemos concatenar la ejecución de varios callables con 'thenApply'
 		//Cada callable recibe por parámetro el sesultado creado por el anterior
 		return CompletableFuture.supplyAsync(
-			() -> {
-				
+			() -> {				
 				System.out.println("Bloque 1:"+Thread.currentThread().getName());
 				
 				Path path = Paths.get(fichero1);
@@ -260,12 +258,13 @@ public class GestorFicheros {
 	public Future<String> concatenar2(String fichero1, String fichero2){
 
 		String txt = new String();
-		
+
 		return CompletableFuture.supplyAsync(
 			() -> {
 				Path path = Paths.get(fichero1);
 				try {
 					byte[] contenido = Files.readAllBytes(path);
+
 					return new String(contenido);							
 					//return Files.readString(path);
 				} catch (IOException e) {
@@ -277,6 +276,8 @@ public class GestorFicheros {
 				Path path = Paths.get(fichero2);
 				try {
 					byte[] contenido = Files.readAllBytes(path);
+					
+
 					return contenidoFichero1 + new String(contenido);					
 					//return contenidoFichero1 + Files.readString(path);
 				} catch (IOException e) {
@@ -286,5 +287,3 @@ public class GestorFicheros {
 	}
 
 }
-
-

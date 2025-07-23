@@ -9,10 +9,10 @@ public class Pelicula {
 	
 	//No es buena idea definir atributos de tipo Optional. 
 	//Es muy mala idea
-	//Es una mala pr√°ctica
-	//Es un antipatr√≥n
+	//Es una mala pr·ctica
+	//Es un antipatrÛn
 	//Es querer morirse
-	//Debemos utilizarlos s√≥lo como return en m√©todos
+	//Debemos utilizarlos sÛlo como return en mÈtodos (de negocio)
 	private Optional<Director> director;
 	
 	public Pelicula() {
@@ -25,7 +25,7 @@ public class Pelicula {
 		this.id = id;
 		this.titulo = titulo;
 		
-		//Esto ser√≠a lo adecuado
+		//Esto serÌa lo adecuado
 		//director = Optional.empty();
 		
 		Director d = new Director("Sr. Smith");
@@ -59,7 +59,7 @@ public class Pelicula {
 		this.director = director;
 	}*/
 
-	//As√≠n:
+	//AsÌn:
 	public void setDirector(Director director) {
 		this.director = Optional.of(director);
 	}

@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -13,7 +15,7 @@ import javax.swing.JButton;
 public class PruebasLambdas {
 	
 	private static void insertar() {
-		//MÃ©todo de palo
+		//Método de palo
 		System.out.println("Method of stick");
 	}	
 
@@ -26,20 +28,18 @@ public class PruebasLambdas {
 		//boton.addActionListener(oyente);
 		//boton.addActionListener(new OyenteBotonDale());
 		
-		
-		
-		//Definiendo el oyente con una clase interna anÃ³nima
-		//Una clase interna anÃ³nima es
+		//Definiendo el oyente con una clase interna anónima
+		//Una clase interna anónima es
 		//-una clase definida dentro otra clase y que no tiene nombre
-		//-Con constructor sin parÃ¡metros
-		//-inaccesible desde el resto de la aplicaciÃ³n
+		//-únicamente con constructor sin parámetros
+		//-inaccesible desde el resto de la aplicación
 		//-se programan heredando de una clase o implementando una interfaz
-		//-en un Ãºnico movimiento definimos la clase y creamos el objeto		
+		//-en un único movimiento definimos la clase y creamos el objeto		
 		
 		ActionListener oyente1 = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("BotÃ³n Dale pulsado");
+				System.out.println("Botón Dale pulsado");
 			}
 		};	
 		boton.addActionListener(oyente1);
@@ -48,9 +48,18 @@ public class PruebasLambdas {
 		boton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("BotÃ³n Dale pulsado");
+				System.out.println("Botón Dale pulsado");
 			}
-		});		
+		});
+		
+		
+		
+		boton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Botón Dale pulsado");
+			}
+		});
 		
 		//
 		//Lo mismo con expresiones lambda
@@ -60,7 +69,7 @@ public class PruebasLambdas {
 		ActionListener oyenteBotonInsertar = e -> insertar();
 		boton3.addActionListener(oyenteBotonInsertar);
 			
-		//Mejor todavÃ­a (sin variable):
+		//Mejor todavía (sin variable):
 		boton3.addActionListener( e -> insertar() );		
 		
 		
@@ -69,9 +78,10 @@ public class PruebasLambdas {
 		////////////////////////////////////////
 		
 		//-Solo pueden utilizarse con interfaces
-		//-Que ademÃ¡s tengan Ãºnicamente un mÃ©todo -> interfaces funcionales
+		//-Que además tengan únicamente un método -> interfaces funcionales
 		//		
 		
+		//
 		//interface Reloj{
 		//	public void decirHora();
 		//}			
@@ -81,35 +91,36 @@ public class PruebasLambdas {
 				System.out.println(new Date());
 			}
 		};
-		r1.decirHora();		
-	
-		//
-		//Cuando el mÃ©todo no recibe parÃ¡metros los parentesis son obligatorios
-		//Cuando el metodo solo tiene una lÃ­nea nos podemos ahorrar las llaves del mÃ©todo
-		//
-		Reloj relojDeCuco = () -> System.out.println("CUCÃš CUCÃš: "+new Date());
-		relojDeCuco.decirHora();		
+		r1.decirHora();	
 		
+		//
+		//Cuando el método no recibe parámetros los parentesis son obligatorios
+		//Cuando el metodo solo tiene una línea nos podemos ahorrar las llaves del método
+		//
+		Reloj relojDeCuco = () -> System.out.println("CUCÚ CUCÚ: "+new Date());
+		relojDeCuco.decirHora();
+		
+		//
 		//interface Saludador{
 		//	public void saludar(String nombre);
-		//}
+		//}		
 		System.out.println("========================");
 		Saludador s1 = new Saludador() {
 			public void saludar(String nombre) {
 				System.out.println("Hola "+nombre);
 			}
 		};		
-		s1.saludar("Luis RamÃ³n");		
+		s1.saludar("Luis Ramón");		
 		
 		//
-		//Podemos ahorrarnos el tipo de los parÃ¡metros
-		//Cuando el mÃ©todo recibe un Ãºnico parÃ¡metro y no se indica el tipo se pueden quitar los parentesis
+		//Podemos ahorrarnos el tipo de los parámetros
+		//Cuando el método recibe un único parámetro y no se indica el tipo se pueden quitar los parentesis
 		//		
 		Saludador s2 = nombre -> System.out.println("Hola Radiola "+nombre);
-		s2.saludar("Luis RamÃ³n");
+		s2.saludar("Luis Ramón");
 		
 		
-		
+		//
 		//interface Calculador{
 		//	public void calcular(Double n1, Double n2);
 		//}		
@@ -122,12 +133,12 @@ public class PruebasLambdas {
 		c1.calcular(25d, 500d);		
 
 		//
-		//Cuando se recibe mÃ¡s de un parÃ¡metro los parentesis son obligatorios
+		//Cuando se recibe más de un parámetro los parentesis son obligatorios
 		//		
 		Calculador c2 = (n1, n2) -> System.out.println(n1+n2);
 		c2.calcular(25d, 500d);			
 		
-
+		//
 		//interface Formateador{
 		//	public String formatear(String dato1, String dato2);
 		//}
@@ -141,18 +152,18 @@ public class PruebasLambdas {
 		System.out.println(f1.formatear("aaa", "bbb"));		
 		
 		//
-		//Cuando quitamos las llaves del mÃ©todo el compilador aÃ±ade un return IMPLÃCITO
+		//Cuando quitamos las llaves del método el compilador añade un return IMPLÍCITO
 		//		
 		Formateador f2 = (dato1, dato2) -> dato1+":"+dato2;
 		System.out.println(f2.formatear("aaa", "bbb"));		
 		
 			
 		//
-		//Â¿Son closures las expresiones lambda de java?
+		//¿Son closures las expresiones lambda de java?
 		//
 		//Solo pueden utilizar variables declaradas fuera de ellas si son finales o 'efectivamente finales'
 		//
-		int m1=25;	
+		int m1 = 25;	
 		Consumer<Integer> multiplicador = m2 -> {
 			//m1++;
 			System.out.println(m1*m2);
@@ -163,7 +174,7 @@ public class PruebasLambdas {
 		multiplicador.accept(20);			
 		
 		//
-		//Interfaces funcionales en el api de Java8
+		//Interfaces funcionales en el api de Java8 (Todas son genéricas)
 		//
 		//consumer   : public void accept(T t)
 		//biconsumer : public void accept(T t, J j)
@@ -204,28 +215,28 @@ public class PruebasLambdas {
 	
 }
 
-/*
 class OyenteBotonDale implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("BotÃ³n Dale pulsado");
+		System.out.println("Botón Dale pulsado");
 	}
 }
-*/
-
 
 /////////////////////////////////////////////////
-//Interfaces funcionales: solo tienen un mÃ©todo//
+//Interfaces funcionales: solo tienen un método//
 /////////////////////////////////////////////////
 //
-//La anotaciÃ³n @FunctionalInterface indica al compilador que debe comprobar que efectivamente se trata
-//de una interfaz con un Ãºnico mÃ©todo
+//La anotación @FunctionalInterface indica al compilador que debe comprobar que efectivamente se trata
+//de una interfaz con un único método
 //
 
 @FunctionalInterface
 interface Reloj{
 	void decirHora();
 	//void decirHora2();
+	default void tocoto() {
+		System.out.println("ARSA");
+	}
 }
 
 //Consumer
@@ -243,19 +254,5 @@ interface Calculador{
 interface Formateador{
 	public String formatear(String dato1, String dato2);
 }
-
-
-class OyenteBotonDale implements ActionListener{
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("BotÃ³n DALE pulsado...");
-	
-	}
-	
-}
-
-
-
 
 

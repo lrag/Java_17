@@ -11,7 +11,7 @@ public class Pruebas {
 		System.out.println(sumar(numeros));
 		
 		//La llamada es mucho más sencilla
-		sumar_bis(1,2,3,4,5,6,7,8,9,10,11,12);
+		sumar_bis(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
 		
 	}
 	
@@ -45,6 +45,7 @@ public class Pruebas {
 	//-Debe ser el último parámetro
 	//
 	public static int sumar_bis(int...sumandos) {
+		//Sumandos es un array
 		int total = 0;
 		for(int sumando: sumandos) {
 			total = total + sumando;

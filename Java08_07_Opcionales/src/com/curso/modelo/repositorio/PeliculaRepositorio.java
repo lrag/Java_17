@@ -33,8 +33,8 @@ public class PeliculaRepositorio {
 		}
 	}
 
-	//Una tercera opción (en un repositorio no tiene sentido)
-	public Pelicula buscarExcepción(Integer id) throws NoExisteException{
+	//Una tercera opci�n (en un repositorio no tiene sentido)
+	public Pelicula buscarExcepcion(Integer id) throws NoExisteException{
 		switch(id){
 			case 1 : return new Pelicula(1,"Alien");
 			case 2 : return new Pelicula(2,"Die Hard");

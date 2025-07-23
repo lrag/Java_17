@@ -44,7 +44,7 @@ public class Pruebas {
 		//Tan inmutable no era...
 		discosInmutable.forEach( d -> System.out.println(d));
 		
-		System.exit(0);
+		//System.exit(0);
 		
 		//        //
 		// Java 9 //

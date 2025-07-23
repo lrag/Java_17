@@ -29,7 +29,7 @@ public class TareaRunnableConJoin implements Runnable{
 			e.printStackTrace();
 		}
 		
-		System.out.println("Soy la tarea y el máximo es:"+max+", TH:"+Thread.currentThread().getId());
+		System.out.println("Soy la tarea y el máximo es:"+max+", TH:"+Thread.currentThread().getId()+" ("+Thread.currentThread().getName()+")");
 		
 		resultado = max;
 	}

@@ -11,8 +11,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiFunction;
+import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -81,6 +85,7 @@ public class PruebasStreams {
 		
 		//Java 8: nuevo método en la interfaz collection para recorrer colecciones (tambien lo tienen los mapas).
 		//Recibe un Consumer por parámetro:
+
 		facturas.forEach( e -> System.out.println(e) );
 
 		///////////
@@ -89,7 +94,7 @@ public class PruebasStreams {
 		System.out.println("====================================================");
 		
 		Stream<Factura> s1 = facturas.stream();
-		long n = s1.count();
+		long n = s1.count(); //Para esto habíamos hecho facturas.size()
 		System.out.println("Nº fra: "+n);
 		
 		//Los streams solo pueden utilizarse una vez:
@@ -125,31 +130,31 @@ public class PruebasStreams {
 		//Stream.filter(Predicate predicate). recibe un predicate
 		//predicate: public boolean test(T t)
 		//		
-		//Imperativo:
-		for(Factura f: facturas) {
-			if(f.getTotal()<=200) {
-				continue;
-			}
-			System.out.println(f);
-		}
 		
 		System.out.println("====================================================");
-		//Declarativo 
 		facturas
 			.stream()
-			.filter(f -> f.getTotal() > 200)
+			.filter(f -> f.getTotal() > 200 )
 			.forEach(System.out::println);
 		
 		
+		//Imperativo:
+		int id = 2;
+		for(Factura f: facturas) {
+			if(f.getTotal()<=200 || f.getCliente().getId()!=id) {
+				continue;
+			}
+			System.out.println(f);
+		}		
 		
 		//Concatenando filtros
 		System.out.println("====================================================");
-		int id = 2;
+		//Declarativo y funcional
 		facturas
 			.stream()
 			.filter( f -> f.getTotal()>=200 )
 			.filter( f -> f.getCliente().getId() == id )
-			.forEach( f -> System.out.println(f) );			
+			.forEach( f -> System.out.println(f) );		
 		
 		//cada objeto que sale del stream recorre toda la cadena antes
 		//de que salga el siguiente
@@ -165,7 +170,7 @@ public class PruebasStreams {
 				return fra.getCliente().getId()==id;
 			})
 			.forEach( fra -> System.out.println("3:"+fra));
-		
+
 		//
 		//Iterator: devuelve un iterador
 		//Lo utilizamos para controlar nosotros el ritmo con el que los objetos salen del stream
@@ -186,6 +191,7 @@ public class PruebasStreams {
 			System.out.println("2:"+it.next());
 		}		
 
+		
 		//
 		//Stream.allMatch(Predicate predicate) : boolean - comprueba si todos los elementos cumplen un predicado
 		//Stream.anyMatch(Predicate predicate) : boolean - comprueba si algún elemento cumple un predicado
@@ -281,7 +287,7 @@ public class PruebasStreams {
 		for(Cliente c: clientes2) {			
 			sc.enviarCorreoE(c.getNombre(), "OLA KE TAL");
 		}
-		*/	
+		*/		
 		
 		//DECLARATIVO, FUNCIONAL
 		facturas
@@ -289,7 +295,7 @@ public class PruebasStreams {
 			.map(fra -> fra.getCliente()) //a partir de aqui tenemos un stream de clientes
 			.distinct() //Este 'distinct' se aplica a los clientes
 			.forEach( cli -> sc.enviarCorreoE(cli.getNombre(), "OLA KE TAL, GRAZIAS POR SU KONPRA") );				
-		
+
 		/*idem: (para comprobar que map devuelve Stream)
 		Stream<Cliente> streamClientes = 
 			facturas
@@ -393,7 +399,7 @@ public class PruebasStreams {
 		//En Java 8 tenemos el metodo forEach en mapas
 		//DECLARATIVO
 		mapa.forEach((k, v) -> System.out.println(k+":"+v));	
-		
+
 		//
 		//Agregando con sumatorio, media y SummaryStatistics
 		//
@@ -451,12 +457,25 @@ public class PruebasStreams {
 				.collect( Collectors.groupingBy( fra -> fra.getCliente() ));		
 		rs.forEach( (k, v) -> System.out.println( k+":"+v) );			
 				
+		System.out.println("---------------------------------");
+		
 		//Agrupando facturas por el id del cliente
 		Map<Integer, List<Factura>> rs2 = 
 			facturas
 				.stream()
 				.collect( Collectors.groupingBy( fra -> fra.getCliente().getId() ));
 		rs2.forEach( (k, v) -> System.out.println( k+":"+v) );
+		
+		System.out.println("---------------------------------");
+		
+		//Agrupando facturas por el nombre del cliente
+		Map<String, List<Factura>> rs3 = 
+				facturas
+				.stream()
+				.collect( Collectors.groupingBy( fra -> fra.getCliente().getNombre() ));
+		rs3.forEach( (k, v) -> System.out.println( k+":"+v) );
+		
+		System.exit(0);
 		
 		//
 		//Flat map
@@ -652,11 +671,24 @@ public class PruebasStreams {
 		//                          //
 		//////////////////////////////
 		
-		
-		
-		
 		//Metodos colocados al comienzo del stream
 		//No hay
+		
+		//Metodos 'en el medio'
+		//filter   : stream con los elementos que han pasado el filtro
+		
+		//Métodos que cierran el stream
+		//count   - long
+		//forEach - void
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//Metodos 'en el medio'
 		//filter   : stream con los elementos que han pasado el filtro
@@ -679,7 +711,7 @@ public class PruebasStreams {
 		//Reduce   : Depende de la función que se utilize
 		
 	}
-
+	
 }
 
 //Ejemplo de un comparador
@@ -697,6 +729,15 @@ class ServicioComunicaciones {
 		System.out.println("Enviando el mensaje "+mensaje+" a "+direccion);
 	}
 }
+
+
+
+
+
+
+
+
+
 
 
 

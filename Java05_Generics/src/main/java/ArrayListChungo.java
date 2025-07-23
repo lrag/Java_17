@@ -1,17 +1,16 @@
 
-public class ArrayListChungo<T> {
+public class ArrayListChungo {
 
 	Object[] elementos= new Object[20];
 	int pos = 0;
 	
-	public void add(T obj){
+	public void add(Object obj){
 		elementos[pos] = obj;
 		pos++;
 	}
 	
-	public T get(int pos){
-		return (T) elementos[pos];
+	public Object get(int pos){
+		return  elementos[pos];
 	}
-	
 	
 }

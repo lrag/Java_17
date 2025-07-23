@@ -13,12 +13,14 @@ public class ClaseQueImplementaDosInterfacesQueDefinenElMismoMetodo implements I
 		InterfazB.super.metodo();
 	}
 	
+	/*
 	//No hay problema con los metodos estáticos porque en java 8 si queremos acceder a un método estático
 	//debemos usar el nombre de la interfaz
 	public void metodo2() {
 		InterfazA.metodoEstatico();
 		InterfazB.metodoEstatico();
 	}
+	*/
 	
 	
 }

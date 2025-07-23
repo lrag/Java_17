@@ -47,7 +47,10 @@ public class Pruebas {
 		String txt3 = "Hola Radiola";
 		String txt4 = txt3.toUpperCase();
 		String txt5 = txt3.transform(txt -> txt.toUpperCase());
+		String txt6 = txt3.transform(String::toUpperCase);
 		System.out.println(txt4);
+		System.out.println(txt5);
+		System.out.println(txt6);
 		
 	}
 	

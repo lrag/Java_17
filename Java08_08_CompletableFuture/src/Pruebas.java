@@ -86,24 +86,6 @@ public class Pruebas {
 			//e.printStackTrace();
 		}
 		
-		System.exit(42);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		System.out.println("===================================");
 		Future<String> contenido5 = gf.concatenar2("fichero.txt", "fichero2.txt");		
 		//

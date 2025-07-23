@@ -36,10 +36,29 @@ public class ServicioDiscos {
 	}
 	
 	public Optional<Disco> buscar(Integer id) {
+		
+		/*
+		Disco disco = repositorioDiscos.getById(id);
+		if(disco != null ) {
+			disco.setTitulo(d.getTitulo().toUpperCase());
+		}
+		//2º
+		//3º
+		return disco;
+		*/
+		
 		//return repositorioDiscos
 		//	.findById(id)
 		//	.orElse(null);
-		return repositorioDiscos.findById(id);
+		
+		//return repositorioDiscos.findById(id);
+		
+		return repositorioDiscos.findById(id)
+			.map( d -> {
+				d.setTitulo(d.getTitulo().toUpperCase());
+				return d;
+			})
+			.map(d -> d);
 	}
 	
 	public Optional<String> buscarTitulo(Integer id) {

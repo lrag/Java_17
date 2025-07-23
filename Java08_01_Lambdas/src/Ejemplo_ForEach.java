@@ -29,8 +29,8 @@ public class Ejemplo_ForEach {
 		});
 		
 		palabras.forEach( s -> System.out.println("<<<<<"+s) );
-		palabras.forEach( t -> System.out.println(":::::"+t) );
-		palabras.forEach( t -> System.out.println(">>>>>"+t) );
+		palabras.forEach( s -> System.out.println(":::::"+s) );
+		palabras.forEach( s -> System.out.println(">>>>>"+s) );
 		
 	}
 	
@@ -55,14 +55,14 @@ class ArrayListChungo<T> {
 	public int size() {
 		return contador;
 	}	
-	
-	//Esta es una 'función de orden superior' porque recibe por parámetro otra función
-	//Tambien lo son las funciones que devuelven funciones
-	public void forEach(Consumer<T> consumer) {
-		for(int a=0; a<contador; a++) {
-			T elemento = (T) elementos[a]; 
-			consumer.accept(elemento);
-		}
+
+	public void forEach(Consumer<T> action) {
+		for(Object obj: elementos) {
+			if(obj == null) {
+				break;
+			}
+			action.accept((T) obj);
+		}		
 	}
 		
 }

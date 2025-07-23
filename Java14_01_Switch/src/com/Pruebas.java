@@ -26,7 +26,7 @@ public class Pruebas {
 			default : 
 				System.out.println("XXX");		
 		}
-
+		
 		//
 		//Si utilizamos la flecha ya no es necesario el break 
 		//
@@ -63,7 +63,7 @@ public class Pruebas {
 		
 		//Mucho mejor así
 		trimestre = switch(mes) {
-			case 1,2,3 -> 1;
+			case 1,2,3 -> 1; //Aqui hay un 'return' implícito
 			case 4,5,6 -> 2;
 			case 7,8,9 -> 3;
 			case 10,11,12 -> 4;

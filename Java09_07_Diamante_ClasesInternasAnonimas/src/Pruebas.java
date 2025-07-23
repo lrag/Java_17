@@ -7,8 +7,6 @@ public class Pruebas {
 		
 		List<String> palabras = new ArrayList<>();
 		
-		
-		
 		//Hasta Java 8
 		EjemploInterfaz<String> ei1 = new EjemploInterfaz<String>() {
 			@Override
@@ -16,7 +14,7 @@ public class Pruebas {
 				System.out.println(obj);
 			}
 		};
-
+		
 		//Desde Java 9 podemos utilizar el operador diamante en clases internas anónimas
 		EjemploInterfaz<String> ei2 = new EjemploInterfaz<>() {
 			@Override

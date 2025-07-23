@@ -33,10 +33,16 @@ public class PruebasListaTareas {
 		ExecutorService walker = Executors.newFixedThreadPool(2);
 		//Podemos ir añadiendo las tareas una a una según van llegando
 		//Y esta la manera más habitual de hacerlo
-		//Future<Integer> max1 = walker.submit(t1);
-		//Future<Integer> max2 = walker.submit(t2);
-		//Future<Integer> max3 = walker.submit(t3);
+		/*
+		Future<Integer> max1F = walker.submit(t1);
+		Future<Integer> max2F = walker.submit(t2);
+		Future<Integer> max3F = walker.submit(t3);
 
+		int max1 = max1F.get();
+		int max2 = max2F.get();
+		int max3 = max3F.get();
+		*/	
+		
 		//Podemos también enchufarle una lista de tareas al executor
 		List<Tarea> tareas = new ArrayList<>();
 		tareas.add(t1);
@@ -68,12 +74,11 @@ public class PruebasListaTareas {
 			e.printStackTrace();
 		}
 
-
+		
 		System.out.println("Seguimos...");
-
+		
 		//
 		walker.shutdown();
-
 
 	}
 	

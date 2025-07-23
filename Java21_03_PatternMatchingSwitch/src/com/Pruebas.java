@@ -48,8 +48,8 @@ public class Pruebas {
 		System.out.println("=================================");
 		String respuesta = "y";
 		switch(respuesta) {
-			case String s when s.equalsIgnoreCase("Y") || s.equalsIgnoreCase("S") -> System.out.println("Que si.");
-			case String s when s.equalsIgnoreCase("N") || s.equalsIgnoreCase("N") -> System.out.println("Que no.");
+			case String s when s.equalsIgnoreCase("Y") || s.equalsIgnoreCase("S")  -> System.out.println("Que si.");
+			case String s when s.equalsIgnoreCase("N") || s.equalsIgnoreCase("No") -> System.out.println("Que no.");
 			case String s -> System.out.println("¿Qué?");
 			//default -> System.out.println("¿Qué?");
 		}
